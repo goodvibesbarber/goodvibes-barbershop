@@ -1,5 +1,5 @@
 
-import { Service, SocialPost } from './types';
+import { Service, SocialPost, Barber } from './types';
 
 export const COLORS = {
   background: '#FAFAF9',
@@ -17,6 +17,33 @@ export const SERVICES: Service[] = [
   { id: '6', name: 'Nose Wax', price: 8, duration: '10 mins', category: 'wax' },
   { id: '7', name: 'Vibes Experience', price: 55, duration: '60 mins', category: 'package', description: 'Full Service: Haircut & Beard Trim/Shave.' },
   { id: '8', name: 'Good Vibes Experience', price: 70, duration: '90 mins', category: 'package', description: 'The Works: Haircut, Head Massage, Beard/Shave, and Facial.' },
+];
+
+export const BARBERS: Barber[] = [
+  {
+    id: 'b1',
+    name: 'Marcus "Vibe" Tan',
+    specialty: 'Master of Fades & Textures',
+    bio: 'With over 12 years of experience in the grooming industry, Marcus co-founded Good Vibes to bring precision and peace back to the barber chair.',
+    imageUrl: 'https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?auto=format&fit=crop&q=80&w=800',
+    instagram: '@marcus_vibes'
+  },
+  {
+    id: 'b2',
+    name: 'Sarah "Blade" Lim',
+    specialty: 'Straight-Razor Artisan',
+    bio: 'The shop’s resident expert in traditional shaves and meticulous beard sculpting. Sarah believes every shave should be a meditative experience.',
+    imageUrl: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80&w=800',
+    instagram: '@sarah_shaves'
+  },
+  {
+    id: 'b3',
+    name: 'Kelvin "The Groom" Yeo',
+    specialty: 'Modern Styling & Contours',
+    bio: 'Specializing in contemporary styles and sharp contours. Kelvin ensures that every student and professional leaves looking their absolute sharpest.',
+    imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=800',
+    instagram: '@kelv_groomer'
+  }
 ];
 
 export const INSTAGRAM_POSTS: SocialPost[] = [

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import About from './components/About';
+import Barbers from './components/Barbers';
 import BookingModal from './components/BookingModal';
 import InstagramFeed from './components/InstagramFeed';
 import Location from './components/Location';
@@ -33,6 +34,7 @@ const App: React.FC = () => {
         <Hero onBookClick={() => handleOpenBooking()} />
         <About />
         <Services onBookClick={handleOpenBooking} />
+        <Barbers />
         <GroomingAssistant />
         <InstagramFeed />
         <Location />

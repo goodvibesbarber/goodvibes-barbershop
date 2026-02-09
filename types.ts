@@ -23,3 +23,12 @@ export interface SocialPost {
   likes: number;
   caption: string;
 }
+
+export interface Barber {
+  id: string;
+  name: string;
+  specialty: string;
+  bio: string;
+  imageUrl: string;
+  instagram?: string;
+}

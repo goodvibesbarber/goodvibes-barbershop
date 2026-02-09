@@ -35,6 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick }) => {
         <div className="hidden md:flex items-center space-x-8">
           <a href="#about" className={`text-sm font-medium hover:text-[#B8860B] transition-colors ${isScrolled ? 'text-[#18181B]' : 'text-white'}`}>ABOUT</a>
           <a href="#services" className={`text-sm font-medium hover:text-[#B8860B] transition-colors ${isScrolled ? 'text-[#18181B]' : 'text-white'}`}>SERVICES</a>
+          <a href="#barbers" className={`text-sm font-medium hover:text-[#B8860B] transition-colors ${isScrolled ? 'text-[#18181B]' : 'text-white'}`}>BARBERS</a>
           <a href="#location" className={`text-sm font-medium hover:text-[#B8860B] transition-colors ${isScrolled ? 'text-[#18181B]' : 'text-white'}`}>LOCATION</a>
           <button 
             onClick={onBookClick}
