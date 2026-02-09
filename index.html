@@ -4,59 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Good Vibes Barber Shop | Zero Stress. Perfect Fades.</title>
+    <title>Good Vibes | High-End Barbering Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --matte-black: #18181B;
-            --off-white: #FAFAF9;
-            --accent-gold: #B8860B;
+            --brand-black: #0D0D0D;
+            --brand-gold: #D4AF37;
+            --brand-white: #F8F8F8;
         }
+        
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--off-white);
-            color: var(--matte-black);
+            background-color: var(--brand-black);
+            color: var(--brand-white);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-        /* Industrial Grain Overlay - Creates a premium tactile feel */
-        body::before {
+
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--brand-black); }
+        ::-webkit-scrollbar-thumb { background: var(--brand-gold); }
+
+        /* Luxury Noise Texture */
+        .noise::before {
             content: "";
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             opacity: 0.04;
             pointer-events: none;
             z-index: 9999;
         }
-        html {
-            scroll-behavior: smooth;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
 
-        /* Custom selection color */
+        /* Reveal Transitions */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
+
         ::selection {
-            background: var(--accent-gold);
-            color: white;
+            background: var(--brand-gold);
+            color: black;
+        }
+
+        .border-gold-subtle {
+            border-color: rgba(212, 175, 55, 0.2);
         }
     </style>
     <script>
-        // Shim for process.env to prevent crashes on static hosts like GitHub Pages
         window.process = window.process || { env: {} };
     </script>
     <script type="importmap">
@@ -70,9 +85,24 @@
     }
     </script>
 </head>
-<body>
+<body class="noise">
     <div id="root"></div>
-    <!-- Entry point for the React application -->
     <script type="module" src="./index.tsx"></script>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('section').forEach(s => {
+                s.classList.add('reveal');
+                observer.observe(s);
+            });
+        });
+    </script>
 </body>
 </html>
