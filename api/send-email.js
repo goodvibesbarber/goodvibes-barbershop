@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
     const data = await resend.emails.send({
       from: 'Booking Assistant <onboarding@resend.dev>',
-      to: ['YOUR_OWN_GMAIL@gmail.com'], // <--- CHANGE THIS TO YOUR EMAIL
+      to: ['pasposip@gmail.com'], // <--- CHANGE THIS TO YOUR EMAIL
       subject: `New Booking: ${service} with ${name}`,
       html: `
         <h1>New Booking Received!</h1>
