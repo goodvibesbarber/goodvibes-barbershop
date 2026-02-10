@@ -1,7 +1,7 @@
 
      import React, { useState } from 'react';
 // ... your other imports ...
-import { sendNotification } from './notifier.ts'; // <--- ADD THIS
+import { sendNotification } from './notifier';
 
 const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
