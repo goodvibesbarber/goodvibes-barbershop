@@ -8,7 +8,7 @@ export const sendBookingEmail = async (bookingDetails: any) => {
     },
     body: JSON.stringify({
       from: 'onboarding@resend.dev',
-      to: 'YOUR-pasposip@GMAIL.COM', // <--- Put your email here!
+      to: 'pasposip@GMAIL.COM', // <--- Put your email here!
       subject: 'New Booking Alert!',
       html: `<p>Someone booked! Details: ${JSON.stringify(bookingDetails)}</p>`,
     }),
