@@ -1,21 +1,22 @@
 import { Resend } from 'resend';
 
-// This connects to your secret key in Vercel
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
-  const { name, date, service } = req.body;
+  const { name, date, service, email } = req.body;
 
   try {
-    await resend.emails.send({
+    const data = await resend.emails.send({
       from: 'Booking Assistant <onboarding@resend.dev>',
-      to: ['pasposip@gmail.com'], 
-      subject: `New Barber Booking: ${service}`,
+      // This MUST match your Resend account email for now
+      to: ['sanaeelghazi007@gmail.com'], 
+      subject: `New Booking: ${service} with ${name}`,
       html: `
-        <h1>New Booking Received!</h1>
+        <h1>New Booking!</h1>
         <p><strong>Client:</strong> ${name}</p>
         <p><strong>Service:</strong> ${service}</p>
         <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Client Email:</strong> ${email}</p>
       `,
     });
 
