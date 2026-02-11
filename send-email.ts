@@ -1,18 +1,10 @@
-// This is your "Kitchen" that cooks the email
-export const sendBookingEmail = async (bookingDetails: any) => {
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-    },
-    body: JSON.stringify({
-      from: 'onboarding@resend.dev',
-      to: 'pasposip@GMAIL.COM', // <--- Put your email here!
-      subject: 'New Booking Alert!',
-      html: `<p>Someone booked! Details: ${JSON.stringify(bookingDetails)}</p>`,
-    }),
-  });
-  
-  return response.ok;
-};
+import { Resend } from 'resend';
+
+const resend = new Resend('re_YX3vW7YC_3pvEy3KTp3ZdmkYtbU86SxGk');
+
+resend.emails.send({
+  from: 'onboarding@resend.dev',
+  to: 'pasposip@gmail.com',
+  subject: 'Hello World',
+  html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
+});
