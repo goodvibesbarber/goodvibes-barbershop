@@ -1,42 +1,76 @@
 import React, { useState } from 'react';
-// This line links App.tsx to your notifier file
-import { sendNotification } from './notifier';
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+import Services from './components/Services.tsx';
+import About from './components/About.tsx';
+import BookingModal from './components/BookingModal.tsx';
+import Location from './components/Location.tsx';
+import Footer from './components/Footer.tsx';
+import GroomingAssistant from './components/GroomingAssistant.tsx';
+import { Service } from './types.ts';
+// This line links your design to the email sender
+import { sendNotification } from './notifier.ts';
+
+const EditorialMarquee = () => (
+  <div className="bg-[#D4AF37] py-8 overflow-hidden whitespace-nowrap border-y border-black/10">
+    <div className="animate-marquee inline-block">
+      {[...Array(6)].map((_, i) => (
+        <span key={i} className="text-black font-serif text-5xl font-bold uppercase italic mx-12 select-none tracking-tighter">
+          Zero Stress • Perfect Fades • Elite Grooming • Singapore Studio • Zero Stress • Perfect Fades •
+        </span>
+      ))}
+    </div>
+  </div>
+);
 
 const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  
-  // This function runs when someone clicks "Confirm Booking"
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+
+  const handleOpenBooking = (service?: Service) => {
+    if (service) setSelectedService(service);
+    setIsBookingOpen(true);
+  };
+
+  const handleCloseBooking = () => {
+    setIsBookingOpen(false);
+    setSelectedService(null);
+  };
+
+  // NEW FUNCTION: This sends the email when the user confirms their booking
   const handleFinalBooking = async (data: any) => {
     const success = await sendNotification(data);
     if (success) {
-      alert("Booking sent successfully!");
-      setIsBookingOpen(false);
+      alert("Booking notification sent to the owner!");
     } else {
-      alert("Something went wrong. Please try again.");
+      alert("Booking recorded, but email notification failed. Please check connection.");
     }
+    handleCloseBooking();
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Your website content goes here */}
-      <button 
-        onClick={() => setIsBookingOpen(true)}
-        className="bg-yellow-500 text-black px-6 py-2 rounded"
-      >
-        Book Now
-      </button>
+    <div className="min-h-screen selection:bg-[#D4AF37] selection:text-black">
+      <Navbar onBookClick={() => handleOpenBooking()} />
+      
+      <main>
+        <Hero onBookClick={() => handleOpenBooking()} />
+        <About />
+        <EditorialMarquee />
+        <Services onBookClick={handleOpenBooking} />
+        <GroomingAssistant />
+        <Location />
+      </main>
 
-      {/* This is a simple example of your booking logic */}
+      <Footer />
+
       {isBookingOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white text-black p-8 rounded">
-            <h2>Complete your Booking</h2>
-            <button onClick={() => handleFinalBooking({ name: 'Guest', service: 'Haircut', date: 'Today' })}>
-              Confirm
-            </button>
-            <button onClick={() => setIsBookingOpen(false)}>Cancel</button>
-          </div>
-        </div>
+        <BookingModal 
+          isOpen={isBookingOpen} 
+          onClose={handleCloseBooking} 
+          initialService={selectedService} 
+          // This tells the Modal to run our email function on confirm
+          onConfirm={handleFinalBooking}
+        />
       )}
     </div>
   );
