@@ -1,6 +1,5 @@
 import { Resend } from 'resend';
 
-// This line pulls the key safely from your Vercel settings
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
@@ -11,7 +10,9 @@ export default async function handler(req, res) {
       from: 'Barber Shop <onboarding@resend.dev>',
       to: 'pasposip@gmail.com',
       subject: 'NEW BOOKING RECEIVED',
-      html: `<p>Name: ${name}</p><p>Service: ${service}</p><p>Date: ${date}</p>`
+      html: `<p><strong>Name:</strong> ${name}</p>
+             <p><strong>Service:</strong> ${service}</p>
+             <p><strong>Date:</strong> ${date}</p>`
     });
 
     return res.status(200).json({ success: true });
